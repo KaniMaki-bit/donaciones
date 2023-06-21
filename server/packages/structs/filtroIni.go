@@ -5,5 +5,6 @@ type FiltroRecibo struct {
 }
 
 type Filtro struct {
-	Nombre string
+	Nombre      string `json:"nombre"`
+	Descripcion string `json:"descripcion"`
 }
