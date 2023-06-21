@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
   return (
@@ -28,16 +29,18 @@ Lorem Impsum</div>
                 <div className="font-['Lato'] font-extrabold text-[#FF6600] text-lg my-3">Meta de Donativos</div>
                 <div className="font-['Lato'] font-extrabold text-white text-lg my-3">10,000 Donativos</div>
                 <div className="font-['Lato'] font-extrabold text-[#FF6600] text-lg my-3">Progreso Donativos</div>
-                <div className="bg-gray-200 h-8 w-10/12 rounded-lg overflow-hidden text-center font-['Lato'] font-extrabold text-3xl text-white">
+                <div className="bg-gray-200 h-8 w-10/12 rounded-lg overflow-hidden text-center text-white font-['Lato']">
                     <div
-                        className="bg-[#FF6600] h-full transition-all"
+                        className="bg-[#FF6600] h-full transition-all text-center"
                         style={{ width: `70%` }}
                     >70%</div>
                 </div>
 
  
                 <div className="font-['Lato'] font-extrabold text-white text-lg my-3">Da click para ver registros</div>
-                <button className="my-5 bg-[#FF0B0B] rounded-lg px-4 py-2 w-1/2 text-white">Registra Donativos</button>
+                <button className="my-5 bg-[#FF0B0B] rounded-lg px-4 py-2 w-1/2 text-white">
+                    <Link to="/registro_donativo">Registra Donativos</Link>
+                </button>
 
             </div>
         </div>
