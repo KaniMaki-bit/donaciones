@@ -13,12 +13,12 @@ func FiltroOrganizaciones(pgDB *sql.DB) http.HandlerFunc {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		// Recibo los parámetros de GET
-		categories := r.URL.Query().Get("categories")
+		categories := r.URL.Query()["categories"]
 
 		// Query base
 		query := `SELECT nombre, descripcion
-			FROM organizacion
-			WHERE id = ANY(organizacionPorCategorie($1))`
+					FROM organizacion
+					WHERE id = ANY(organizacionPorCategorie($1))`
 
 		// Ejecutar la consulta
 		rows, err := pgDB.Query(query, categories)
