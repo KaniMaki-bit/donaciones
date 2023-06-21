@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"hapi/packages/structs"
 	"net/http"
+	"strings"
 )
 
 func FiltroOrganizaciones(pgDB *sql.DB) http.HandlerFunc {
@@ -13,15 +14,22 @@ func FiltroOrganizaciones(pgDB *sql.DB) http.HandlerFunc {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		// Recibo los parámetros de GET
-		categories := r.URL.Query()["categories"]
+		categories := r.URL.Query().Get("categories[]") // categories será una cadena separada por comas
+
+		// Convertir la cadena de categorías en un arreglo
+		categoryArray := strings.Split(categories, ",")
 
 		// Query base
-		query := `SELECT nombre, descripcion
-					FROM organizacion
-					WHERE id = ANY(organizacionPorCategorie($1))`
+		query := `
+			SELECT nombre, descripcion
+			FROM organizacion
+			WHERE id IN (
+				SELECT unnest(organizacionPorCategorie($1))
+			)
+		`
 
 		// Ejecutar la consulta
-		rows, err := pgDB.Query(query, categories)
+		rows, err := pgDB.Query(query, categoryArray)
 		if err != nil {
 			http.Error(w, "Error retrieving organizations", http.StatusInternalServerError)
 			return
