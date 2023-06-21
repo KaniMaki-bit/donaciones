@@ -18,26 +18,46 @@ func FiltroOrganizaciones(pgDB *sql.DB) http.HandlerFunc {
 		// Query base
 		query := `SELECT nombre, descripcion
 			FROM organizacion
-			WHERE id = idnameFunction($1)`
+			WHERE id = ANY(organizacionPorCategorie($1))`
 
-		// Recibo la información en la estructura de resultado
-		var org structs.InfoOrg
-		err := pgDB.QueryRow(query, categories).Scan(&org.Nombre)
+		// Ejecutar la consulta
+		rows, err := pgDB.Query(query, categories)
 		if err != nil {
-			http.Error(w, "Error retriving organization", http.StatusInternalServerError)
+			http.Error(w, "Error retrieving organizations", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Slice para almacenar los resultados
+		var orgs []structs.ResIdOrg
+
+		// Recorrer los resultados de la consulta
+		for rows.Next() {
+			var org structs.ResIdOrg
+			err := rows.Scan(&org.Nombre, &org.Descripcion)
+			if err != nil {
+				http.Error(w, "Error retrieving organizations", http.StatusInternalServerError)
+				return
+			}
+			orgs = append(orgs, org)
+		}
+
+		// Verificar errores en rows.Next()
+		if err = rows.Err(); err != nil {
+			http.Error(w, "Error retrieving organizations", http.StatusInternalServerError)
 			return
 		}
 
-		// Paso los datos de la estructura a un JSON de resultado
-		orgJSON, err := json.Marshal(org)
+		// Serializar el slice orgs a JSON
+		orgsJSON, err := json.Marshal(orgs)
 		if err != nil {
-			http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
+			http.Error(w, "Error retrieving organizations", http.StatusInternalServerError)
 			return
 		}
 
 		// Postear resultado de operación por HTTP
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write(orgJSON)
+		w.Write(orgsJSON)
 	}
 }

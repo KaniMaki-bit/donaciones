@@ -6,6 +6,11 @@ type IdOrg struct {
 	ID string
 }
 
+type ResIdOrg struct {
+	Nombre      []string `json:"nombre"`
+	Descripcion []string `json:"descripcion"`
+}
+
 type InfoOrg struct {
 	ID          string `json:"id"`
 	Nombre      string `json:"nombre"`
@@ -16,6 +21,10 @@ type InfoOrg struct {
 	Correo      string `json:"correo"`
 	Telefono    string `json:"telefono"`
 	Meta        string `json:"meta"`
+}
+
+type resInfOrg struct {
+	Name string `json:"info"`
 }
 
 type GoalProgress struct {
