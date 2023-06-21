@@ -42,12 +42,14 @@ func main() {
 	r.HandleFunc("/infoOrganizacion", read.InfoOrganizacion(pgDB)).Methods("GET")
 	r.HandleFunc("/filtroOrganizaciones", read.FiltroOrganizaciones(pgDB)).Methods("GET")
 	r.HandleFunc("/productosPermitidos", read.ProductosPermitidos(pgDB)).Methods("GET")
+	r.HandleFunc("/checkCredentials", read.AuthenticateAdmin(pgDB)).Methods("GET")
+	r.HandleFunc("/goalProgress", read.GoalProgress(pgDB)).Methods("GET")
 
 	// wrire operations
 	r.HandleFunc("/registrarDonativo", create.RegistrarDonativo(pgDB)).Methods("POST")
 
 	// Check status and PORT
-	log.Println("Starting RIDDLE on", os.Getenv("PORT"))
+	log.Println("Starting HAPI on", os.Getenv("PORT"))
 	err = http.ListenAndServe(os.Getenv("PORT"), r)
 	if err != nil {
 		log.Fatal(err)

@@ -16,7 +16,7 @@ func InfoOrganizacion(pgDB *sql.DB) http.HandlerFunc {
 		idOrg := r.URL.Query().Get("idOrg")
 
 		//Query base
-		query := `SELECT id, nombre, direccion
+		query := `SELECT id, nombre, direccion, meta
 			FROM organizacion
 			WHERE id = $1`
 
