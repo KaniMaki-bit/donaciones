@@ -7,13 +7,6 @@ import (
 	"net/http"
 )
 
-type Organizacion struct {
-	ID        int    `json:"id"`
-	Nombre    string `json:"nombre"`
-	Direccion string `json:"direccion"`
-	// Agrega más campos según la estructura de la tabla "organizacion"
-}
-
 func InfoOrganizacion(pgDB *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Enable CORS
