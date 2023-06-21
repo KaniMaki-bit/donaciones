@@ -15,6 +15,7 @@ type InfoOrg struct {
 	Direccion   string `json:"direccion"`
 	Correo      string `json:"correo"`
 	Telefono    string `json:"telefono"`
+	Meta        string `json:"meta"`
 }
 
 type GoalProgress struct {

@@ -16,13 +16,13 @@ func InfoOrganizacion(pgDB *sql.DB) http.HandlerFunc {
 		idOrg := r.URL.Query().Get("idOrg")
 
 		//Query base
-		query := `SELECT id, nombre, direccion, meta
+		query := `SELECT id, nombre, descripcion, mision, vision, direccion, correo, telefono, meta
 			FROM organizacion
 			WHERE id = $1`
 
 		//recibo la info en la estructura de resultado
 		var org structs.InfoOrg
-		err := pgDB.QueryRow(query, idOrg).Scan(&org.ID, &org.Nombre, &org.Descripcion, &org.Mision, &org.Vision, &org.Direccion, &org.Correo, &org.Telefono)
+		err := pgDB.QueryRow(query, idOrg).Scan(&org.ID, &org.Nombre, &org.Descripcion, &org.Mision, &org.Vision, &org.Direccion, &org.Correo, &org.Telefono, &org.Meta)
 		if err != nil {
 			http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
 			return
