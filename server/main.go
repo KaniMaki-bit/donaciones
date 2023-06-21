@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"os"
 
+	"hapi/packages/create"
+
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -38,6 +40,11 @@ func main() {
 
 	// Read operations
 	r.HandleFunc("/infoOrganizacion", read.InfoOrganizacion(pgDB)).Methods("GET")
+	r.HandleFunc("/filtroOrganizaciones", read.FiltroOrganizaciones(pgDB)).Methods("GET")
+	r.HandleFunc("/productosPermitidos", read.ProductosPermitidos(pgDB)).Methods("GET")
+
+	// wrire operations
+	r.HandleFunc("/registrarDonativo", create.RegistrarDonativo(pgDB)).Methods("POST")
 
 	// Check status and PORT
 	log.Println("Starting RIDDLE on", os.Getenv("PORT"))

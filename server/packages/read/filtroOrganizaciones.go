@@ -16,9 +16,9 @@ func FiltroOrganizaciones(pgDB *sql.DB) http.HandlerFunc {
 		categories := r.URL.Query().Get("categories")
 
 		// Query base
-		query := `SELECT nombre
-			FROM productos
-			WHERE nameFunction = ?`
+		query := `SELECT nombre, descripcion
+			FROM organizacion
+			WHERE id = idnameFunction($1)`
 
 		// Recibo la información en la estructura de resultado
 		var org structs.InfoOrg

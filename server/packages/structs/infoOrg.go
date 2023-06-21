@@ -5,12 +5,12 @@ type IdOrg struct {
 }
 
 type InfoOrg struct {
-	ID          string
-	Nombre      string
-	Descripcion string
-	Mision      string
-	Vision      string
-	Direccion   string
-	Correo      string
-	Telefono    string
+	ID          string `json:"id"`
+	Nombre      string `json:"nombre"`
+	Descripcion string `json:"descripcion"`
+	Mision      string `json:"mision"`
+	Vision      string `json:"vision"`
+	Direccion   string `json:"direccion"`
+	Correo      string `json:"correo"`
+	Telefono    string `json:"telefono"`
 }
