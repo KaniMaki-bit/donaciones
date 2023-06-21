@@ -1,10 +1,13 @@
-module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+export default {
+    content: [
+        "./index.html",
+        "./src/**/*.{js,ts,jsx,tsx}",
+    ],
+    theme: {
+        fontFamily: {
+            sans: ['Lato', 'sans-serif']
+        },
+        extend: {},
+    },
+    plugins: [],
 }
