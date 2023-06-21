@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom'
 import { Login } from './views/Login'
 import { Home } from './views/Home'
-import { RegistroD } from './components/Registro_Donativo'
+import { RegistroD } from './views/Registro_Donativo'
 import { Landing } from './views/Landing'
 import { Organizacion } from './views/Organizacion'
 function App() {
