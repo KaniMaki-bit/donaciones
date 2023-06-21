@@ -7,11 +7,11 @@ export const Landing = () => {
     <>
       <Navbar>
         <div className='flex flex-row w-full'>
-          <div className='w-1/2 pl-20 pr-10'>
+          <div className='w-1/2 pl-24 pr-14'>
             <div className='flex flex-col items-start justify-start pt-24'>
-              <span className='text-5xl text-[#0040E0] font-bold'>NoMoreHunger</span>
-              <span className='text-4xl text-[#071A4A] font-extrabold pt-6'>El cambio comienza contigo un grano a la vez</span>
-              <span className='text-[#071A4A] text-lg font-semibold pt-8 pb-2'>NoMoreHunger busca erradicar la hambruna y pobreza<br></br>
+              <span className='text-6xl text-[#0040E0] font-bold'>NoMoreHunger</span>
+              <span className='text-5xl text-[#071A4A] font-bold pt-6 leading-[3rem] tracking-tight'>El cambio comienza contigo <br/> un grano a la vez</span>
+              <span className='text-[#071A4A] text-lg font-semibold tracking-wider leading-relaxed pt-8 pb-2'>NoMoreHunger busca erradicar la hambruna y pobreza<br></br>
                 dentro del territorio Mexicano a traves de acciones<br></br>
                 filantrópicas</span>
               <span className='text-lg pt-16 font-semibold'>Comienza revisando cada una de las causas por apoyar</span>
