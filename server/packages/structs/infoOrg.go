@@ -1,5 +1,7 @@
 package structs
 
+import "time"
+
 type IdOrg struct {
 	ID string
 }
@@ -13,4 +15,16 @@ type InfoOrg struct {
 	Direccion   string `json:"direccion"`
 	Correo      string `json:"correo"`
 	Telefono    string `json:"telefono"`
+}
+
+type GoalProgress struct {
+	Goal string `json:"progreso"`
+}
+
+type RecordDonatives struct {
+	Nombre   string    `json:"nombre"`
+	Apellido string    `json:"apellido"`
+	Articulo string    `json:"articulo"`
+	Cantidad string    `json:"cantidad"`
+	Fecha    time.Time `json:"fecha"`
 }
