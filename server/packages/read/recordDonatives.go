@@ -12,22 +12,41 @@ func RecordDonatives(pgDB *sql.DB) http.HandlerFunc {
 		// Enable CORS
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
-		// Recibo los parámetros de GET
+		// Recibo el parámetro de GET
 		idOrg := r.URL.Query().Get("idOrg")
 
 		// Query base
-		query := `SELECT obtenerDonaciones($1)`
+		query := `SELECT * FROM obtenerDonaciones($1)`
 
-		// Recibo la información en la estructura de resultado
-		var org structs.RecordDonatives
-		err := pgDB.QueryRow(query, idOrg).Scan(&org.Nombre, &org.Apellido, &org.Articulo, &org.Cantidad, &org.Fecha)
+		// Realizar la consulta a la base de datos
+		rows, err := pgDB.Query(query, idOrg)
 		if err != nil {
-			http.Error(w, "Error retriving organization", http.StatusInternalServerError)
+			http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		// Crear una estructura para almacenar los resultados
+		var donatives []structs.RecordDonatives
+		for rows.Next() {
+			var donative structs.RecordDonatives
+			err := rows.Scan(&donative.Nombre, &donative.Apellido, &donative.Fecha, &donative.Articulo, &donative.Cantidad)
+			if err != nil {
+				http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
+				return
+			}
+			donatives = append(donatives, donative)
+		}
+
+		// Comprobar si ocurrieron errores durante la iteración de las filas
+		err = rows.Err()
+		if err != nil {
+			http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
 			return
 		}
 
 		// Paso los datos de la estructura a un JSON de resultado
-		orgJSON, err := json.Marshal(org)
+		donativesJSON, err := json.Marshal(donatives)
 		if err != nil {
 			http.Error(w, "Error retrieving organization", http.StatusInternalServerError)
 			return
@@ -36,6 +55,6 @@ func RecordDonatives(pgDB *sql.DB) http.HandlerFunc {
 		// Postear resultado de operación por HTTP
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write(orgJSON)
+		w.Write(donativesJSON)
 	}
 }
