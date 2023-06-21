@@ -44,6 +44,7 @@ func main() {
 	r.HandleFunc("/productosPermitidos", read.ProductosPermitidos(pgDB)).Methods("GET")
 	r.HandleFunc("/checkCredentials", read.AuthenticateAdmin(pgDB)).Methods("GET")
 	r.HandleFunc("/goalProgress", read.GoalProgress(pgDB)).Methods("GET")
+	r.HandleFunc("/recordDonatives", read.RecordDonatives(pgDB)).Methods("GET")
 
 	// wrire operations
 	r.HandleFunc("/registrarDonativo", create.RegistrarDonativo(pgDB)).Methods("POST")
