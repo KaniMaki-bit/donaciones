@@ -2,4 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.skew-y-10 {
+  transform: skewY(-10deg);
+}
