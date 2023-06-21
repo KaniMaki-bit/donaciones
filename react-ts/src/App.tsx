@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom'
 import { Login } from './views/Login'
-import { Home } from './components/Home'
+import { Home } from './views/Home'
 import { Landing } from './views/Landing'
 function App() {
 

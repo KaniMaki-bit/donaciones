@@ -1,17 +1,16 @@
 import { PropsWithChildren } from "react";
-import logo from '../assets/pageLogo.png'
+import logo from '../assets/logoLetra.jpeg'
 
 type NavbarProps = PropsWithChildren<{}>
 
 function Navbar({ children }: NavbarProps) {
   return (
     <>
-      <nav className="font-['Latos'] w-full h-[12%]">
+      <nav className="w-full h-[12%]">
         <div className="p-4 h-full w-full flex">
           <div className="w-1/2 h-full">
-            <div className="flex h-full items-center">
-              <img className="h-10" src={logo} alt="React logo" />
-              <span className="text-xl font-bold">No More Hunger</span>
+            <div className="flex h-full items-center pl-16">
+              <img className="h-14" src={logo} alt="React logo" />
             </div>
           </div>
           <div className="w-1/2">
@@ -24,7 +23,7 @@ function Navbar({ children }: NavbarProps) {
           </div>
         </div>
       </nav>
-      <div className="font-['Latos'] relative w-full h-full overflow-y-auto">
+      <div className="relative w-full h-full">
         {children}
       </div>
     </>
